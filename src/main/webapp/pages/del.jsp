@@ -12,8 +12,8 @@
 </head>
 <body>
 <form action="/delete" method="post">
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
+    <input type="text" name="username" placeholder="Username" required pattern=^[a-zA-Z]+$>
+    <input type="password" name="password" placeholder="Password" required>
     <button>Delete</button>
 </form>
 </body>

@@ -12,9 +12,9 @@
 </head>
 <body>
 <form action="/registration" method="post">
-    <input type="text" name="name" placeholder="Name">
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
+    <input type="text" name="name" placeholder="Name" required pattern=^[a-zA-Z]+$>
+    <input type="text" name="username" placeholder="Username" required pattern=^[a-zA-Z]+$>
+    <input type="password" name="password" placeholder="Password" required>
     <button>Submit</button>
 </form>
 </body>

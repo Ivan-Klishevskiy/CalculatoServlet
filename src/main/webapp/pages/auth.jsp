@@ -12,8 +12,8 @@
 </head>
 <body>
 <form action="/authorization" method="post">
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
+    <input type="text" name="username" placeholder="Username" required pattern=^[a-zA-Z]+$>
+    <input type="password" name="password" placeholder="Password" required>
     <button>Submit</button>
 </form>
 <p>${requestScope.message}</p>

@@ -13,11 +13,11 @@
 <body>
 <form action="/editing" method="post">
     <h1>Enter old username and password</h1>
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
+    <input type="text" name="username" placeholder="Username" required pattern=^[a-zA-Z]+$>
+    <input type="password" name="password" placeholder="Password" required>
     <h1>Enter a new user and password</h1>
-    <input type="text" name="newName" placeholder="new name">
-    <input type="password" name="newPassword" placeholder="new password">
+    <input type="text" name="newName" placeholder="new name" required pattern=^[a-zA-Z]+$>
+    <input type="password" name="newPassword" placeholder="new password" required>
     <button>Submit</button>
 </form>
 </body>
