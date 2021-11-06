@@ -26,7 +26,6 @@ public class AuthorizationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        storage=StorageService.getInstance();
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         User user = storage.findByUsername(username);

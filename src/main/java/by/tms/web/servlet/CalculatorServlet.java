@@ -14,12 +14,10 @@ import java.util.List;
 @WebServlet("/calculator")
 public class CalculatorServlet extends HttpServlet {
 
-    private CalcService calcService;
     private StorageService storage;
 
     @Override
     public void init() throws ServletException {
-        calcService = CalcService.getInstance();
         storage=StorageService.getInstance();
     }
 
@@ -34,8 +32,7 @@ public class CalculatorServlet extends HttpServlet {
         double second = Double.parseDouble(req.getParameter("secondNumber"));
         String sign = req.getParameter("sign");
 
-        calcService.setParamCalculator(first, second, sign);
-        double result = calcService.calculation();
+        double result = CalcService.calculate(first, second, sign);
 
         req.setAttribute("result", result);
         storage.saveOperation(storage.getTempId(), first, second, sign, result);

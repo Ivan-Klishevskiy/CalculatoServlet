@@ -1,27 +1,42 @@
 package by.tms.service;
 
-import by.tms.entity.Calculator;
-
 public class CalcService {
 
-    private static final CalcService instance = new CalcService();
-
-    private Calculator calc=new Calculator();
-
-    public static CalcService getInstance(){
-        return instance;
-
+    private static double sum(double first, double second) {
+        return (first + second);
     }
 
-    public void setParamCalculator(double first, double second, String sign){
-        calc.setFirst(first);
-        calc.setSecond(second);
-        calc.setSign(sign);
+    private static double sub(double first, double second) {
+        return (first - second);
     }
 
-    public double calculation(){
-        return calc.calculation();
+    private static double div(double first, double second) {
+        return (first / second);
     }
 
+    private static double mul(double first, double second) {
+        return (first * second);
+    }
+
+
+    public static double calculate(double first, double second, String sign){
+
+        switch (sign) {
+            case "+": {
+                return sum(first, second);
+            }
+            case "-": {
+                return sub(first, second);
+            }
+            case "/": {
+                return div(first, second);
+            }
+            case "*": {
+                return mul(first, second);
+            }
+            default:
+                return 0;
+        }
+    }
 }
 
