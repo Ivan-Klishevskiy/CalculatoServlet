@@ -30,7 +30,10 @@ public class RegistrationServlet extends HttpServlet {
         String name = req.getParameter("name");
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        store.saveUser(new User(name,username,password));
+        if(!store.saveUser(new User(name, username, password, "user"))){
+            req.setAttribute("messageReg", "The user is already registered!");
+            getServletContext().getRequestDispatcher("/pages/reg.jsp").forward(req, resp);
+        }
         resp.sendRedirect("/authorization");
     }
 }

@@ -13,7 +13,15 @@
 </head>
 <body>
 <h1>Hello ${sessionScope.user.name}</h1>
+
+<c:if test="${sessionScope.role!=null}">
+    <a href="/admin-history">Admin history</a><br>
+    <a href="/admin-status">Set status admin</a><br>
+    <a href="/admin-delete">Delete by admin</a><br>
+</c:if>
+
 <c:if test="${sessionScope.user!=null}">
+    <a href="/calculator">Calculator</a><br>
     <a href="/logout">Logout</a><br>
     <a href="/editing">Editing</a><br>
     <a href="/delete">Delete</a><br>

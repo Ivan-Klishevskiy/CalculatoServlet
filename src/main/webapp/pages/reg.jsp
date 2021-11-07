@@ -17,5 +17,6 @@
     <input type="password" name="password" placeholder="Password" required>
     <button>Submit</button>
 </form>
+<p>${requestScope.messageReg}</p>
 </body>
 </html>

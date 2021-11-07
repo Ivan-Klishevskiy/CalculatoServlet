@@ -11,6 +11,7 @@
     <title>Editing</title>
 </head>
 <body>
+<a href="/">Main page</a><br><br>
 <form action="/editing" method="post">
     <h1>Enter old username and password</h1>
     <input type="text" name="username" placeholder="Username" required pattern=^[a-zA-Z]+$>

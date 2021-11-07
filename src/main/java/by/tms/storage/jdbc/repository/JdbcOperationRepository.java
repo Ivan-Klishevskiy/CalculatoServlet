@@ -65,5 +65,4 @@ public class JdbcOperationRepository {
 
         return list;
     }
-
 }

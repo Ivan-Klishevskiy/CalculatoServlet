@@ -20,13 +20,21 @@ public class StorageService {
         return instance;
     }
 
+    public List<User> findAllUsers(){
+        return jdbcUserStorage.findAllUsers();
+    }
+
     public User findByUsername(String username){
         return jdbcUserStorage.findByUsername(username);
     }
 
-    public void saveUser(User user){
+    public boolean saveUser(User user){
+        if (jdbcUserStorage.findByUsername(user.getUsername()).getUsername() != null) {
+            return false;
+        }
         memoryUserStorage.saveUser(user);
         jdbcUserStorage.saveUser(user);
+        return true;
     }
 
     public void updateUser(String username, String newName, String newPassword){
@@ -45,6 +53,14 @@ public class StorageService {
 
     public List<String> findOperationsById(int id){
         return jdbcOperationStorage.findOperationsById(id);
+    }
+
+    public boolean setAdminUser (int id){
+        return jdbcUserStorage.setAdminUser(id);
+    }
+
+    public boolean deleteUserByAdmin(String username){
+        return jdbcUserStorage.deleteUserByAdmin(username);
     }
 
     public long getTempId(){

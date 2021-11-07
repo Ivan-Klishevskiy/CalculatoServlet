@@ -11,6 +11,7 @@
     <title>Authorization</title>
 </head>
 <body>
+<a href="/">Main page</a><br><br>
 <form action="/authorization" method="post">
     <input type="text" name="username" placeholder="Username" required pattern=^[a-zA-Z]+$>
     <input type="password" name="password" placeholder="Password" required>

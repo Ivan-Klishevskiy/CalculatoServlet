@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet("/authorization")
 public class AuthorizationServlet extends HttpServlet {
@@ -33,6 +34,9 @@ public class AuthorizationServlet extends HttpServlet {
             if (user.getPassword().equals(password)){
                 req.getSession().setAttribute("user", user);
                 req.getSession().setAttribute("id", user.getId());
+                if(Objects.equals(user.getRole(), "admin")) {
+                    req.getSession().setAttribute("role", "admin");
+                }
                 resp.sendRedirect("/calculator");
                 return;
             } else {

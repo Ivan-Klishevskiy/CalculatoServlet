@@ -5,6 +5,7 @@ public class User {
     private String name;
     private String username;
     private String password;
+    private String role;
 
     public User() {
     }
@@ -20,6 +21,29 @@ public class User {
         this.name = name;
         this.username = username;
         this.password = password;
+    }
+
+    public User(String name, String username, String password, String role) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(long id, String name, String username, String password, String role) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public long getId() {
@@ -61,6 +85,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
