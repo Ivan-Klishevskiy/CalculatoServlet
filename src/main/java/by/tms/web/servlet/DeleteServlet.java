@@ -30,9 +30,9 @@ public class DeleteServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         User user = store.findByUsername(username);
-        if (user != null) {
+        if (user.getUsername() != null) {
             if (user.getPassword().equals(password)) {
-                store.deleteUser(username,password);
+                store.deleteUser(username, password);
                 req.getSession().invalidate();
                 resp.sendRedirect("/");
                 return;

@@ -12,7 +12,7 @@ public class InMemoryUserStorage {
 
     private List<User> userList = new ArrayList<>();
 
-    public static InMemoryUserStorage getInstance(){
+    public static InMemoryUserStorage getInstance() {
         return instance;
     }
 
@@ -40,7 +40,7 @@ public class InMemoryUserStorage {
 
     }
 
-    public void deleteUser(String username,String password) {
+    public void deleteUser(String username, String password) {
         userList.removeIf(user -> username == user.getUsername() && password == user.getPassword());
 
     }

@@ -49,7 +49,8 @@ public class JdbcOperationRepository {
         try (Connection con = JdbcConnection.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(SELECT)) {
             preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();;
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ;
             while (resultSet.next()) {
                 String first = resultSet.getString(1);
                 String second = resultSet.getString(2);

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Kliis
@@ -11,12 +12,46 @@
     <title>Authorization</title>
 </head>
 <body>
-<a href="/">Main page</a><br><br>
-<form action="/authorization" method="post">
-    <input type="text" name="username" placeholder="Username" required pattern=^[a-zA-Z]+$>
-    <input type="password" name="password" placeholder="Password" required>
-    <button>Submit</button>
-</form>
-<p>${requestScope.message}</p>
+<jsp:include page="_header.jsp"/>
+<div class="container">
+    <div class="row justify-content-center">
+        <figure class="text-center g-5">
+            <h1 class="display-5">Authorization</h1>
+        </figure>
+
+        <form action="/authorization" method="post">
+            <div class="row justify-content-center">
+                <div class="col-md-3">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="username"
+                               name="username">
+                        <label for="floatingInput">Username</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                               name="password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-3 offset-md-2 gy-3">
+                    <button class="btn btn-primary" type="submit">Log in</button>
+                </div>
+            </div>
+        </form>
+        <div class="row justify-content-center">
+            <div class="col-md-3 ">
+                <c:if test="${requestScope.message!=null}">
+                    <div class="alert alert-danger" role="alert">
+                            ${requestScope.message}
+                    </div>
+                </c:if>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -37,7 +37,7 @@ public class AuthorizationServlet extends HttpServlet {
                 if(Objects.equals(user.getRole(), "admin")) {
                     req.getSession().setAttribute("role", "admin");
                 }
-                resp.sendRedirect("/calculator");
+                resp.sendRedirect("/");
                 return;
             } else {
                 req.setAttribute("message", "Wrong password!");

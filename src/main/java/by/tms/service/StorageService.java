@@ -12,23 +12,23 @@ public class StorageService {
 
     private final InMemoryUserStorage memoryUserStorage = InMemoryUserStorage.getInstance();
 
-    private final JdbcUserRepository jdbcUserStorage =new JdbcUserRepository();
+    private final JdbcUserRepository jdbcUserStorage = new JdbcUserRepository();
 
     private final JdbcOperationRepository jdbcOperationStorage = new JdbcOperationRepository();
 
-    public static StorageService getInstance(){
+    public static StorageService getInstance() {
         return instance;
     }
 
-    public List<User> findAllUsers(){
+    public List<User> findAllUsers() {
         return jdbcUserStorage.findAllUsers();
     }
 
-    public User findByUsername(String username){
+    public User findByUsername(String username) {
         return jdbcUserStorage.findByUsername(username);
     }
 
-    public boolean saveUser(User user){
+    public boolean saveUser(User user) {
         if (jdbcUserStorage.findByUsername(user.getUsername()).getUsername() != null) {
             return false;
         }
@@ -37,33 +37,39 @@ public class StorageService {
         return true;
     }
 
-    public void updateUser(String username, String newName, String newPassword){
-        memoryUserStorage.updateUser(username, newName, newPassword);
-        jdbcUserStorage.updateUser(username, newName, newPassword);
+    public boolean updateUser(String username, String password, String newName, String newPassword) {
+        User user = jdbcUserStorage.findByUsername(username);
+        if (user.getUsername() != null && user.getPassword().equals(password)) {
+            memoryUserStorage.updateUser(username, newName, newPassword);
+            jdbcUserStorage.updateUser(username, newName, newPassword);
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public  void deleteUser(String username, String password){
+    public void deleteUser(String username, String password) {
         memoryUserStorage.deleteUser(username, password);
         jdbcUserStorage.deleteUser(username, password);
     }
 
-    public void saveOperation(long id, double first, double second, String sign, double result){
+    public void saveOperation(long id, double first, double second, String sign, double result) {
         jdbcOperationStorage.saveOperation(id, first, second, sign, result);
     }
 
-    public List<String> findOperationsById(int id){
+    public List<String> findOperationsById(int id) {
         return jdbcOperationStorage.findOperationsById(id);
     }
 
-    public boolean setAdminUser (int id){
+    public boolean setAdminUser(int id) {
         return jdbcUserStorage.setAdminUser(id);
     }
 
-    public boolean deleteUserByAdmin(String username){
+    public boolean deleteUserByAdmin(String username) {
         return jdbcUserStorage.deleteUserByAdmin(username);
     }
 
-    public long getTempId(){
+    public long getTempId() {
         return jdbcUserStorage.getTempId();
     }
 }

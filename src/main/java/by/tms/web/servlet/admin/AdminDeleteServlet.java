@@ -18,32 +18,33 @@ public class AdminDeleteServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        storage=StorageService.getInstance();
+        storage = StorageService.getInstance();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         getListUsers(req, storage);
-        getServletContext().getRequestDispatcher("/pages/admin_pages/admDelete.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/pages/admin/admDelete.jsp").forward(req, resp);
     }
 
     static void getListUsers(HttpServletRequest req, StorageService storage) {
-        List<User> listUser= storage.findAllUsers();
+        List<User> listUser = storage.findAllUsers();
         List<String> str = new CopyOnWriteArrayList<>();
         for (User user : listUser) {
-            str.add(String.format("%d | %s %s | %s\n",user.getId(), user.getName(), user.getUsername(),user.getRole()));
+            str.add(user.getUsername());
         }
         req.setAttribute("allUsers", str);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(storage.deleteUserByAdmin(req.getParameter("username"))){
-            req.setAttribute("message","user deleted");
-        }else{
-            req.setAttribute("message","user not found");
+        if (storage.deleteUserByAdmin(req.getParameter("userInput"))) {
+            req.setAttribute("message", "user deleted");
+        } else {
+            req.setAttribute("errorMessage", "user not found");
         }
-        getServletContext().getRequestDispatcher("/pages/admin_pages/admDelete.jsp").forward(req, resp);
+        getListUsers(req, storage);
+        getServletContext().getRequestDispatcher("/pages/admin/admDelete.jsp").forward(req, resp);
     }
 
     static void getUserList(HttpServletRequest req, StorageService storage) {

@@ -18,19 +18,21 @@ public class AdminHistoryServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        storage=StorageService.getInstance();
+        storage = StorageService.getInstance();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AdminDeleteServlet.getListUsers(req, storage);
-        getServletContext().getRequestDispatcher("/pages/admin_pages/admHistory.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/pages/admin/admHistory.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<String> listOperation = storage.findOperationsById(Integer.parseInt(req.getParameter("id")));
+        AdminDeleteServlet.getListUsers(req, storage);
+        User user = storage.findByUsername(req.getParameter("userInput"));
+        List<String> listOperation = storage.findOperationsById((int) user.getId());
         req.setAttribute("history", listOperation);
-        getServletContext().getRequestDispatcher("/pages/admin_pages/resHistory.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/pages/admin/admHistory.jsp").forward(req, resp);
     }
 }

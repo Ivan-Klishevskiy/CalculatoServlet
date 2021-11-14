@@ -9,8 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @WebServlet("/admin-status")
 public class AdminStatusServlet extends HomeServlet {
@@ -18,23 +16,24 @@ public class AdminStatusServlet extends HomeServlet {
 
     @Override
     public void init() throws ServletException {
-        storage=StorageService.getInstance();
+        storage = StorageService.getInstance();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         AdminDeleteServlet.getListUsers(req, storage);
-        getServletContext().getRequestDispatcher("/pages/admin_pages/admStatus.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/pages/admin/admStatus.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        if(storage.setAdminUser(id)){
+        User user = storage.findByUsername(req.getParameter("userInput"));
+        if (storage.setAdminUser((int) user.getId())) {
             req.setAttribute("message", "User status update");
-        }else{
-            req.setAttribute("message", "User not found");
+        } else {
+            req.setAttribute("errorMessage", "User not found");
         }
-        getServletContext().getRequestDispatcher("/pages/admin_pages/admStatus.jsp").forward(req, resp);
+        AdminDeleteServlet.getListUsers(req, storage);
+        getServletContext().getRequestDispatcher("/pages/admin/admStatus.jsp").forward(req, resp);
     }
 }

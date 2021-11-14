@@ -18,7 +18,7 @@ public class CalculatorServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        storage=StorageService.getInstance();
+        storage = StorageService.getInstance();
     }
 
     @Override

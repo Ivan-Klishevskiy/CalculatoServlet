@@ -17,7 +17,7 @@ public class EditingServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        store=StorageService.getInstance();
+        store = StorageService.getInstance();
     }
 
     @Override
@@ -29,22 +29,36 @@ public class EditingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        User user = store.findByUsername(username);
-        if (user != null){
-            if (user.getPassword().equals(password)){
-                String newName=req.getParameter("newName");
-                String newPassword = req.getParameter("newPassword");
-                store.updateUser(username,newName,newPassword);
-                req.getSession().invalidate();
-                resp.sendRedirect("/");
-                return;
-            } else {
-                req.setAttribute("message", "Wrong password!");
-            }
+        String newName = req.getParameter("newName");
+        String newPassword = req.getParameter("newPassword");
+        if (store.updateUser(username, password, newName, newPassword)) {
+            req.getSession().invalidate();
+            resp.sendRedirect("/");
+            return;
         } else {
             req.setAttribute("message", "User not found!");
         }
         getServletContext().getRequestDispatcher("/pages/edit.jsp").forward(req, resp);
+
+
+//        User user = store.findByUsername(username);
+//        if (user.getUsername() != null) {
+//            if (user.getPassword().equals(password)) {
+//                String newName = req.getParameter("newName");
+//                String newPassword = req.getParameter("newPassword");
+//                store.updateUser(username, newName, newPassword);
+//                req.getSession().invalidate();
+//                resp.sendRedirect("/");
+//                return;
+//            } else {
+//                req.setAttribute("message", "Wrong password!");
+//            }
+//        } else {
+//            req.setAttribute("message", "User not found!");
+//        }
+//        getServletContext().getRequestDispatcher("/pages/edit.jsp").forward(req, resp);
+//    }
+
     }
 }
 

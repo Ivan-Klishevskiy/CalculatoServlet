@@ -12,24 +12,9 @@
     <title>Home</title>
 </head>
 <body>
-<h1>Hello ${sessionScope.user.name}</h1>
+<jsp:include page="_header.jsp"/>
+<img src="https://c.tenor.com/7ynNPpnsQ8MAAAAi/duck-dancing.gif" class="img-fluid">
 
-<c:if test="${sessionScope.role!=null}">
-    <a href="/admin-history">Admin history</a><br>
-    <a href="/admin-status">Set status admin</a><br>
-    <a href="/admin-delete">Delete by admin</a><br>
-</c:if>
 
-<c:if test="${sessionScope.user!=null}">
-    <a href="/calculator">Calculator</a><br>
-    <a href="/logout">Logout</a><br>
-    <a href="/editing">Editing</a><br>
-    <a href="/delete">Delete</a><br>
-</c:if>
-
-<c:if test="${sessionScope.user==null}">
-    <a href="/registration">Registration</a><br>
-    <a href="/authorization">Authorization</a><br>
-</c:if>
 </body>
 </html>
